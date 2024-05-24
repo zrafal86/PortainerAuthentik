@@ -1,0 +1,15 @@
+
+services:
+  portainer:
+    image: portainer/portainer-ce:alpine
+    container_name: portainer
+    command: --admin-password '$$2a$$08$$lNuHqHk/.72L1UTUErxTiem0ar3taz85uthvTTg4amkOrosk2LeJ6' -H unix:///var/run/docker.sock
+    ports:
+      - 9443:9443
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer_data:/data
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
